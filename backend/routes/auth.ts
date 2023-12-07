@@ -35,9 +35,9 @@ router.post("/", async (req, res) => {
       });
     }
 
-    const isComparePassword = bcrypt.compareSync(password, user.password);
+    const isComparedPassword = bcrypt.compareSync(password, user.password);
 
-    if (!isComparePassword) {
+    if (!isComparedPassword) {
       return res.status(400).json({
         message: "Incorrect password.",
       });
@@ -57,6 +57,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// auth.ts post api 밖에 작성
 export const verifyToken = async (
   req: any,
   res: Response,

@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// 유저 확인
+// user.ts 유저 확인
 router.get("/", verifyToken, async (req: any, res) => {
   try {
     const { account } = req.user;
