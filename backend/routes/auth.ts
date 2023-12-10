@@ -45,9 +45,7 @@ router.post("/", async (req, res) => {
 
     const token = jwt.sign({ account }, process.env.JWT_SECRET!);
 
-    return res.json({
-      token,
-    });
+    return res.json({ token });
   } catch (error) {
     console.error(error);
 

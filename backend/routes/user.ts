@@ -62,9 +62,7 @@ router.get("/", verifyToken, async (req: any, res) => {
   try {
     const { account } = req.user;
 
-    return res.json({
-      account,
-    });
+    return res.json({ account });
   } catch (error) {
     console.error(error);
 
