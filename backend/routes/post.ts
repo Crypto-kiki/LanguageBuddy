@@ -7,6 +7,18 @@ const router = express.Router();
 
 const client = new PrismaClient();
 
+const select = {
+  id: true,
+  createdAt: true,
+  title: true,
+  content: true,
+  user: {
+    select: {
+      account: true,
+    },
+  },
+};
+
 // 글 생성
 router.post("/", verifyToken, async (req: any, res) => {
   try {
@@ -30,17 +42,7 @@ router.post("/", verifyToken, async (req: any, res) => {
         content,
         userId: user.id,
       },
-      select: {
-        id: true,
-        createdAt: true,
-        title: true,
-        content: true,
-        user: {
-          select: {
-            account: true,
-          },
-        },
-      },
+      select,
     });
 
     return res.json(post);
@@ -68,7 +70,13 @@ router.get("/", async (req, res) => {
     const posts = await client.post.findMany({
       skip: +page * 10,
       take: 10,
+      orderBy: {
+        id: "desc",
+      },
+      select,
     });
+
+    return res.json(posts);
   } catch (error) {
     console.error(error);
 
