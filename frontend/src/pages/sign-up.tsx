@@ -1,15 +1,15 @@
-// src/pages/sign-in.tsx
+// src/pages/sign-up.tsx
 import axios from "axios";
-import { FC, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const SignIn: FC = () => {
+const SignUp = () => {
   const [account, setAccount] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const navigate = useNavigate();
 
-  const onSubmitSignIn = async (e: FormEvent) => {
+  const onSubmitSignUp = async (e: FormEvent) => {
     try {
       e.preventDefault();
 
@@ -22,10 +22,10 @@ const SignIn: FC = () => {
         return;
 
       const response = await axios.post(
-        `${process.env.REACT_APP_BACK_URL}/auth`,
+        `${process.env.REACT_APP_BACK_URL}/user`,
         {
           account,
-          password,
+          password, // 암호화 필요함
         }
       );
 
@@ -35,11 +35,10 @@ const SignIn: FC = () => {
       console.error(error);
     }
   };
-
   return (
     <main className="min-h-screen flex flex-col justify-center items-center pb-20">
-      <h1 className="text-2xl font-bold">Hinggu's Board Sign In</h1>
-      <form className="mt-8 flex items-end gap-4" onSubmit={onSubmitSignIn}>
+      <h1 className="text-2xl font-bold">Hinggu's Board Sign Up</h1>
+      <form className="mt-8 flex items-end gap-4" onSubmit={onSubmitSignUp}>
         <div className="flex flex-col gap-2 relative">
           <input
             className="input-style"
@@ -53,17 +52,20 @@ const SignIn: FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Link
-            to="/sign-up"
-            className="absolute -bottom-5 left-2 text-xs text-blue-500 active:text-blue-700"
-          >
-            Create an account
-          </Link>
+          <div className="absolute -bottom-5 left-2 text-xs">
+            Already have an account?
+            <Link
+              className="ml-1 text-blue-500 active:text-blue-700"
+              to="/sign-in"
+            >
+              Sign In
+            </Link>
+          </div>
         </div>
-        <input className="button-style" type="submit" value="Sign In" />
+        <input className="button-style" type="submit" value="Sign Up" />
       </form>
     </main>
   );
 };
 
-export default SignIn;
+export default SignUp;

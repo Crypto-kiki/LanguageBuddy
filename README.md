@@ -1,3 +1,3 @@
 <!-- README.md -->
 
-# Expresss React Language Buddy
+# Expresss React Board
