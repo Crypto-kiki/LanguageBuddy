@@ -66,7 +66,6 @@ router.get("/", async (req, res) => {
         message: "Wrong page.",
       });
     }
-
     const posts = await client.post.findMany({
       skip: +page * 10,
       take: 10,
@@ -81,6 +80,22 @@ router.get("/", async (req, res) => {
     console.error(error);
 
     return res.status(500).json({
+      message: "Server Error.",
+    });
+  }
+});
+
+// post.ts 이어서
+// 전체 글 갯수
+router.get("/count", async (req, res) => {
+  try {
+    const posts = await client.post.findMany();
+
+    return res.json({ count: posts.length });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(400).json({
       message: "Server Error.",
     });
   }
