@@ -5,6 +5,7 @@ import cors from "cors";
 import userRouter from "./routes/user";
 import authRouter from "./routes/auth";
 import postRouter from "./routes/post";
+import commentRouter from "./routes/comment";
 
 const app: Express = express();
 const port: Number = +process.env.PORT! || 3010;
@@ -21,6 +22,7 @@ app.use(
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/post", postRouter);
+app.use("/comment", commentRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, Express TS!");

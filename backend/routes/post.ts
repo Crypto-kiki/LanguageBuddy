@@ -12,6 +12,7 @@ const select = {
   createdAt: true,
   title: true,
   content: true,
+  userId: true,
   user: {
     select: {
       account: true,
