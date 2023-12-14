@@ -1,3 +1,4 @@
+// src/pages/detail.tsx
 import { FC, useEffect } from "react";
 import Header from "../components/Header";
 import { useMe } from "../hooks";
