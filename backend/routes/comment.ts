@@ -96,6 +96,10 @@ router.get("/", async (req, res) => {
       where: {
         postId: +postId,
       },
+      select,
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return res.json(comments);
